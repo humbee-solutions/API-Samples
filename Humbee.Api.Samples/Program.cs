@@ -9,15 +9,15 @@ namespace Humbee.Api.Samples
 {
     public class Program
     {
-        private const string ApiBaseUrl = "https://cloud.humbee.de/api/";
+        private const string ApiBaseUrl = "https://cloud.humbee.de/";
 
         public static async Task Main(string[] args)
         {
-            var userEmail = args[1];
-            var userPassword = args[2];
-            var clientId = args[3];
-            var clientSecret = args[4];
-            var tenantId = args[5];
+            var userEmail = args[0];
+            var userPassword = args[1];
+            var clientId = args[2];
+            var clientSecret = args[3];
+            var tenantId = args[4];
 
             Console.WriteLine("Try to get token from humbee...");
 
@@ -30,7 +30,7 @@ namespace Humbee.Api.Samples
 
         private static async Task ShowMyProfileAsync(HttpClient httpClient)
         {
-            var response = await httpClient.GetAsync("/profile");
+            var response = await httpClient.GetAsync("/api/profile");
             response.EnsureSuccessStatusCode();
 
             var responseText = await response.Content.ReadAsStringAsync();
@@ -56,14 +56,14 @@ namespace Humbee.Api.Samples
 
             var content = new FormUrlEncodedContent(parameters);
 
-            var response = await httpClient.PostAsync("/oauth/token", content);
+            var response = await httpClient.PostAsync("/api/oauth/token", content);
 
             response.EnsureSuccessStatusCode();
 
             var responseText = await response.Content.ReadAsStringAsync();
             var tokenResponseModel = JsonSerializer.Deserialize<TokenModel>(responseText);
 
-            httpClient.DefaultRequestHeaders.Add("Bearer", tokenResponseModel?.AccessToken);
+            httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {tokenResponseModel?.AccessToken}");
 
             return httpClient;
         }
