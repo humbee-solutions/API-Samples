@@ -28,6 +28,7 @@ namespace Humbee.Api.Samples
             await ProfileSample.ShowProfileAsync(httpClient);
             await FileUploadDownloadDeleteSample.UploadDownloadAndDeleteFileAsync(httpClient);
             await FileUploadWithExternalIdSample.UploadDownloadAndDeleteFileAsync(httpClient);
+            await DocumentFulltextSearchSample.UploadDownloadAndSearchForCaptionAsync(httpClient);
         }
 
         private static async Task<HttpClient> GetHumbeeApiHttpClientAsync(string userName, string userPassword, string clientId, string clientSecret, string tenantId)
