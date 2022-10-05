@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Humbee.Api.Samples.Models;
 
@@ -15,8 +16,9 @@ namespace Humbee.Api.Samples
             // prepending the letter "p" and removing the dashes.
             // Example: The property id for uuid 0da9e6a2-b676-4f73-b3d4-3912844ffaa3 is p0da9e6a2b6764f73b3d43912844ffaa3
 
-            const string propertyId = "p0da9e6a2b6764f73b3d43912844ffaa3";  // change to a specific text property of your tenant
-            const string propertyValue = "test value";
+            const string textPropertyId = "p0da9e6a2b6764f73b3d43912844ffaa3";  // change to a specific text property of your tenant
+            const string textPropertyValue = "test value";
+            const string moneyPropertyId = "p3956331ae2b349649e7fb2e8306915d5"; // change to a specific money property of your tenant
             const string documentTypeId = "9cdf5595-1b36-463e-93fe-a40cc8d4f1d9";  // change to a specific document type of your tenant
 
             // Upload File
@@ -25,7 +27,16 @@ namespace Humbee.Api.Samples
             var formContent = new MultipartFormDataContent
             {
                 {new StringContent(documentTypeId), "DocumentTypeId"},
-                {new StringContent(propertyValue), $"Properties[{propertyId}]"},
+                {new StringContent(textPropertyValue), $"Properties[{textPropertyId}]"},
+                {JsonContent.Create(
+                    new MoneyValue
+                    {
+                        Amount = 45m, 
+                        Currency = new Currency
+                        {
+                            Code = "USD"
+                        }
+                    }),  $"Properties[{moneyPropertyId}]"},
                 {new StreamContent(fileStream), "file", "SimplePdf.pdf"}
             };
 
