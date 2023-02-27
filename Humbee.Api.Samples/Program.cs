@@ -9,9 +9,8 @@ namespace Humbee.Api.Samples
 {
     public class Program
     {
-       // private const string ApiBaseUrl = "https://cloud.humbee.de/";
-        private const string ApiBaseUrl = "https://humbeeprod-staging.azurewebsites.net/";
-
+        private const string ApiBaseUrl = "https://cloud.humbee.de/";
+       
         public static async Task Main(string[] args)
         {
             var userEmail = args[0];
@@ -28,12 +27,12 @@ namespace Humbee.Api.Samples
 
             await ProfileSample.ShowProfileAsync(httpClient);
             
-            //await FileUploadDownloadDeleteSample.UploadDownloadAndDeleteFileAsync(httpClient);
-            //await FileUploadWithExternalIdSample.UploadDownloadAndDeleteFileAsync(httpClient);
-            //await FileUploadWithPropertiesSample.UploadDownloadAndDeleteFileAsync(httpClient);
-            //await DocumentFulltextSearchSample.UploadDownloadAndSearchForCaptionAsync(httpClient);
+            await FileUploadDownloadDeleteSample.UploadDownloadAndDeleteFileAsync(httpClient);
+            await FileUploadWithExternalIdSample.UploadDownloadAndDeleteFileAsync(httpClient);
+            await FileUploadWithPropertiesSample.UploadDownloadAndDeleteFileAsync(httpClient);
+            await DocumentFulltextSearchSample.UploadDownloadAndSearchForCaptionAsync(httpClient);
 
-            //await CreateCaseSample.CreateGeneralCaseWithCaptionAsync(httpClient);
+            await CreateCaseSample.CreateGeneralCaseWithCaptionAsync(httpClient);
             await CreateCaseSample.CreateCaseOfSpecificTypeWithCustomPropertiesAsync(httpClient);
         }
 
