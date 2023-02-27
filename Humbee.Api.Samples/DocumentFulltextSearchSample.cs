@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Humbee.Api.Samples.Models;
 
@@ -44,20 +42,5 @@ namespace Humbee.Api.Samples
             response.EnsureSuccessStatusCode();
             Console.WriteLine($"Document {humbeeDocumentId} has been deleted.");
         }
-    }
-
-    public class DocumentsPagedListResult
-    {
-        [JsonPropertyName("value")]
-        public IEnumerable<DocumentModel> Documents { get; set; }
-    }
-
-    public class DocumentModel
-    {
-        [JsonPropertyName("id")]
-        public string Id { get; set; }
-
-        [JsonPropertyName("caption")]
-        public string Caption { get; set; }
     }
 }

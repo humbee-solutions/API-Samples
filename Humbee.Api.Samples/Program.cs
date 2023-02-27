@@ -9,7 +9,8 @@ namespace Humbee.Api.Samples
 {
     public class Program
     {
-        private const string ApiBaseUrl = "https://cloud.humbee.de/";
+       // private const string ApiBaseUrl = "https://cloud.humbee.de/";
+        private const string ApiBaseUrl = "https://humbeeprod-staging.azurewebsites.net/";
 
         public static async Task Main(string[] args)
         {
@@ -26,10 +27,14 @@ namespace Humbee.Api.Samples
             Console.WriteLine("Token received - now issuing some API requests...");
 
             await ProfileSample.ShowProfileAsync(httpClient);
-            await FileUploadDownloadDeleteSample.UploadDownloadAndDeleteFileAsync(httpClient);
-            await FileUploadWithExternalIdSample.UploadDownloadAndDeleteFileAsync(httpClient);
-            await FileUploadWithPropertiesSample.UploadDownloadAndDeleteFileAsync(httpClient);
-            await DocumentFulltextSearchSample.UploadDownloadAndSearchForCaptionAsync(httpClient);
+            
+            //await FileUploadDownloadDeleteSample.UploadDownloadAndDeleteFileAsync(httpClient);
+            //await FileUploadWithExternalIdSample.UploadDownloadAndDeleteFileAsync(httpClient);
+            //await FileUploadWithPropertiesSample.UploadDownloadAndDeleteFileAsync(httpClient);
+            //await DocumentFulltextSearchSample.UploadDownloadAndSearchForCaptionAsync(httpClient);
+
+            //await CreateCaseSample.CreateGeneralCaseWithCaptionAsync(httpClient);
+            await CreateCaseSample.CreateCaseOfSpecificTypeWithCustomPropertiesAsync(httpClient);
         }
 
         private static async Task<HttpClient> GetHumbeeApiHttpClientAsync(string userName, string userPassword, string clientId, string clientSecret, string tenantId)
